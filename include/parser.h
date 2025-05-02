@@ -1,6 +1,6 @@
 #ifndef PARSER_H
 #define PARSER_H
 
-extern void parse_command(char *input, char **args, int *background);
+extern char **parse_command(char *input, int *background);
 
 #endif
