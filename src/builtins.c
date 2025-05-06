@@ -92,3 +92,12 @@ char *custom_pwd() {
 
   return current_directory;
 }
+
+void custom_clear() {
+  // writing the command to the ansi terminal
+
+  char *clear_command = "\033[H\033[2J"; // code to move cursor to the top left
+                                         // corner and clear the screen
+
+  syscall(SYS_write, 1, clear_command, 7);
+}

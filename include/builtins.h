@@ -6,5 +6,6 @@
 extern void custom_ls(int argc, char *args[]);
 extern void custom_cat(int argc, char *args[]);
 extern char *custom_pwd();
+extern void custom_clear();
 
 #endif
