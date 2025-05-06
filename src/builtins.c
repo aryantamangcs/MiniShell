@@ -1,12 +1,30 @@
 #include "../include/builtins.h"
+#include "../include/host_name.h"
 #include <dirent.h>
 #include <fcntl.h>
+#include <libgen.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
 #include <unistd.h>
+
+char *current_directory;
+
+char *get_prompt() {
+  int prompt_size = 100;
+  char *host_name = get_hostname();
+
+  current_directory = custom_pwd();
+
+  // only getting the last direcotry using strtok
+  char *last = basename(current_directory);
+
+  char *prompt = (char *)malloc(prompt_size);
+  snprintf(prompt, prompt_size, "[mini-shell@%s %s ]$ ", host_name, last);
+  return prompt;
+}
 
 void custom_ls(int argc, char *args[]) {
 
@@ -87,10 +105,10 @@ void custom_cat(int argc, char **args) {
 
 char *custom_pwd() {
 
-  char buff[200];
-  char *current_directory = getcwd(buff, sizeof(buff));
+  char *buff = (char *)malloc(100);
+  char *current_directory = getcwd(buff, 100);
 
-  return current_directory;
+  return buff;
 }
 
 void custom_clear() {
@@ -100,4 +118,19 @@ void custom_clear() {
                                          // corner and clear the screen
 
   syscall(SYS_write, 1, clear_command, 7);
+}
+
+void custom_cd(int argc, char *args[]) {
+
+  if (argc > 2) {
+    perror("Invalid argument");
+    return;
+  }
+
+  char *path_name = args[1];
+
+  if (chdir(path_name) == -1) {
+    perror("Cannot change the directory.");
+    return;
+  }
 }
