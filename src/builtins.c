@@ -1,9 +1,12 @@
 #include "../include/builtins.h"
 #include <dirent.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <sys/syscall.h>
 #include <sys/types.h>
+#include <unistd.h>
 
 void custom_ls(int argc, char *args[]) {
 
@@ -49,4 +52,43 @@ void custom_ls(int argc, char *args[]) {
     }
   }
   printf("\n");
+}
+
+void custom_cat(int argc, char **args) {
+
+  int buff_size = 4096;
+  char *buffer = (char *)malloc(4096);
+  int i;
+  if (argc > 1) {
+    for (i = 1; args[i] != NULL; i++) {
+      // reading from the file by opening
+      int fd = syscall(SYS_open, args[i], O_RDONLY);
+      if (fd == -1) {
+        perror("\nCouldn't open  file\n");
+        return;
+      }
+
+      int bytes;
+      int total = 0;
+      while ((bytes = syscall(SYS_read, fd, buffer + total,
+                              buff_size - total)) > 0) {
+        total += bytes;
+
+        // if buffer full then reallocating the buffer
+        if (total == buff_size) {
+          buff_size *= 2;
+          buffer = (char *)realloc(buffer, buff_size);
+        }
+      }
+    }
+  }
+  printf("%s\n", buffer);
+}
+
+char *custom_pwd() {
+
+  char buff[200];
+  char *current_directory = getcwd(buff, sizeof(buff));
+
+  return current_directory;
 }
