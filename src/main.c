@@ -14,11 +14,13 @@ int main() {
   int background = 0;
 
   while (True) {
-    char *host_name = get_hostname();
-    printf("[mini-shell@%s ]$ ", host_name);
+    printf("%s", get_prompt());
 
     if (!fgets(input, sizeof(input), stdin)) {
       perror("fgets failed");
+      continue;
+    }
+    if (input[0] == '\n') {
       continue;
     }
     // replacing the \n with \0

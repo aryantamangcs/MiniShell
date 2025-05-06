@@ -18,7 +18,7 @@ void execute_command(char **args) {
   if (strcmp(command, "ls") == 0) {
     custom_ls(argc, args);
   } else if (strcmp(command, "cd") == 0) {
-    printf("cd\n");
+    custom_cd(argc, args);
   } else if (strcmp(command, "cat") == 0) {
     custom_cat(argc, args);
   } else if (strcmp(command, "pwd") == 0) {
