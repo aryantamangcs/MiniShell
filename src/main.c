@@ -1,4 +1,6 @@
+#include "../include/builtins.h"
 #include "../include/execute_commands.h"
+#include "../include/host_name.h"
 #include "../include/parser.h"
 #include <stdio.h>
 #include <string.h>
@@ -12,7 +14,8 @@ int main() {
   int background = 0;
 
   while (True) {
-    printf("mini-shell> ");
+    char *host_name = get_hostname();
+    printf("[mini-shell@%s ]$ ", host_name);
 
     if (!fgets(input, sizeof(input), stdin)) {
       perror("fgets failed");
