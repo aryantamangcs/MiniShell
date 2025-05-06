@@ -23,6 +23,8 @@ void execute_command(char **args) {
     custom_cat(argc, args);
   } else if (strcmp(command, "pwd") == 0) {
     printf("%s\n", custom_pwd());
+  } else if (strcmp(command, "clear") == 0) {
+    custom_clear();
   } else {
     printf("%s : command not found\n", command);
   }
