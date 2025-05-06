@@ -19,6 +19,10 @@ void execute_command(char **args) {
     custom_ls(argc, args);
   } else if (strcmp(command, "cd") == 0) {
     printf("cd\n");
+  } else if (strcmp(command, "cat") == 0) {
+    custom_cat(argc, args);
+  } else if (strcmp(command, "pwd") == 0) {
+    printf("%s\n", custom_pwd());
   } else {
     printf("%s : command not found\n", command);
   }
