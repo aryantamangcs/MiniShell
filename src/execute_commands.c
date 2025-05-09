@@ -23,6 +23,10 @@ void execute_command(char **args) {
     custom_cat(argc, args);
   } else if (strcmp(command, "pwd") == 0) {
     printf("%s\n", custom_pwd());
+  } else if (strcmp(command, "echo") == 0) {
+    custom_echo(argc, args);
+  } else if (strcmp(command, "whoami") == 0) {
+    printf("%s\n", custom_whoami());
   } else if (strcmp(command, "clear") == 0) {
     custom_clear();
   } else {

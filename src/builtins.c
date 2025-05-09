@@ -3,6 +3,7 @@
 #include <dirent.h>
 #include <fcntl.h>
 #include <libgen.h>
+#include <pwd.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -133,4 +134,33 @@ void custom_cd(int argc, char *args[]) {
     perror("Cannot change the directory.");
     return;
   }
+}
+
+void custom_echo(int argc, char *args[]) {
+
+  // echo can have only one argument
+  if (argc > 2) {
+    perror("Invalid argument for echo.");
+    return;
+  }
+
+  char *argument = args[1];
+
+  // writing them to the standard output
+
+  write(1, argument, strlen(argument));
+  write(1, "\n", 1);
+}
+
+char *custom_whoami() {
+
+  // gettint the current uid from the geteuid syscall of the invoking process
+  uid_t current_uid = geteuid();
+  struct passwd *pw = getpwuid(current_uid);
+  if (pw == NULL) {
+    perror("User not found");
+    return "User not found";
+  }
+
+  return pw->pw_name;
 }
