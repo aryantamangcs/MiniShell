@@ -27,15 +27,20 @@ As a daily linux user, my curiosity led me to **go beyond using just commands** 
 9. **clear** (clears the screen)
 
     
-#### Screenshots
+## Screenshots
 ![ls](https://github.com/user-attachments/assets/9300bc33-e1db-4b52-83e5-01ec0431726f)
+
 ![ls-l](https://github.com/user-attachments/assets/96551cc7-d9bc-43f9-a1ac-6e3928e75d54)
+
 ![ls-a](https://github.com/user-attachments/assets/07e18b4f-9043-46d9-93ba-bf53dfcb4e8c)
+
 ![pwd](https://github.com/user-attachments/assets/8d388cbd-8cf3-4c04-8cd1-0ae25c6a1940)
+
 ![cd](https://github.com/user-attachments/assets/2475003a-37d3-42d1-99f5-6656420b57a6)
+
 ![cat](https://github.com/user-attachments/assets/b16e17fb-206f-4a62-a702-67e2657e2070)
 
-#### Working Mechanism
+## Working Mechanism
 
 1. **ls**
 
